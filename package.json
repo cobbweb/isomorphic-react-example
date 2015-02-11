@@ -1,0 +1,46 @@
+{
+  "name": "react-editor",
+  "version": "0.0.1",
+  "description": "A simple document editor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod": "webpack --config webpack.prod-node.config.js && webpack --config webpack.prod-web.config.js && iojs production.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/webpack/react-starter.git"
+  },
+  "keywords": [
+    "reactjs",
+    "isomorphic",
+    "alt",
+    "flux",
+    "scribe"
+  ],
+  "author": "Andrew Cobby <andrew.cobby@gmail.com> (https://github.com/cobbweb)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/webpack/react-starter/issues"
+  },
+  "homepage": "https://github.com/webpack/react-starter",
+  "dependencies": {
+    "6to5": "^3.5.3",
+    "alt": "^0.13.0",
+    "jsx-loader": "^0.12.2",
+    "koa": "^0.17.0",
+    "koa-better-body": "^1.0.17",
+    "koa-render": "^0.2.1",
+    "koa-router": "^4.0.1",
+    "koa-static": "^1.4.9",
+    "less": "^2.4.0",
+    "less-loader": "^2.0.0",
+    "react": "^0.12.2",
+    "underscore": "^1.7.0",
+    "webpack": "^1.5.3",
+    "webpack-dev-server": "^1.7.0"
+  },
+  "devDependencies": {
+    "react-hot-loader": "^1.1.4"
+  }
+}
