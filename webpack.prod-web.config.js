@@ -14,7 +14,7 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/, loaders: ['jsx?harmony'] },
       { test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
-      { test: /\.jpe?g$/, loader: 'url?limit=10000' }
+      { test: /\.jpe?g$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
     ]
   },
   resolve: {
