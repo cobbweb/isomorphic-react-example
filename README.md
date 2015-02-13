@@ -10,7 +10,7 @@ Production builds to packages, a CommonJS compatible package to be consumed by n
 **Development**
 
 ```
-$ nodemon index.js
+$ npm run dev-server
 ```
 
 This spins up the app server and webpack dev server
@@ -20,5 +20,5 @@ This spins up the app server and webpack dev server
 
 ```
 $ npm run build // build webpack packages for node and client
-$ npm run prod // boot up the prod server with React rendering
+$ npm run prod-server // boot up the prod server with React rendering
 ```
