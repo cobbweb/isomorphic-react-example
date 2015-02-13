@@ -11,7 +11,7 @@ var Application = React.createClass({
         <h1>My App</h1>
         <nav>
           <Link to="app">Home</Link>
-          <Link to="about">About</Link>
+          <Link to="todos">About</Link>
         </nav>
         <section>
           <RouteHandler />

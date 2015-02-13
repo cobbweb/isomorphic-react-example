@@ -3,11 +3,11 @@ var { Route, DefaultRoute } = require('react-router');
 
 var Application = require('./Application');
 var HomePage    = require('./HomePage');
-var AboutPage   = require('./AboutPage');
+var Todos       = require('./Todos');
 
 module.exports = (
   <Route name="app" path="/" handler={Application}>
-    <Route name="about" handler={AboutPage} />
+    <Route name="todos" handler={Todos} />
     <DefaultRoute handler={HomePage} />
   </Route>
 );
