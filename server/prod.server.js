@@ -1,7 +1,7 @@
 var React = require('react');
 var Router = require('react-router');
 var routes = require('../build/main.commonjs.js');
-var app = require('./server');
+var app = require('./bootstrap');
 var router = require('koa-router')();
 
 var scripts = '<script src="/assets/main.js"></script>';

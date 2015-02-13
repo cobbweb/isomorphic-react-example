@@ -1,4 +1,4 @@
-var app = require('./server');
+var app = require('./bootstrap');
 var router = require('koa-router')();
 
 var scripts = '<script src="//localhost:7007/assets/main.js"></script>';
