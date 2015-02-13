@@ -18,14 +18,20 @@ const scripts = {
   local: '<script src="//localhost:7007/assets/main.js"></script>'
 };
 
+const stylesheets = {
+  prod:  '<link type="text/css" rel="stylesheet" href="/assets/main.css"></link>',
+  local: ''
+};
+
 app.use(function *(next) {
   this.html = yield getHTML(this.url, app.env);
   yield next;
 });
 
 router.get('/:page*', function *() {
-  var s = scripts[app.env];
-  this.body = yield this.render('index.html', { scripts: s, html: this.html });
+  var js = scripts[app.env];
+  var css = stylesheets[app.env];
+  this.body = yield this.render('index.html', { scripts: js, html: this.html, stylesheets: css });
 });
 
 app.use(router.routes())

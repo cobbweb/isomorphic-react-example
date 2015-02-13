@@ -1,6 +1,8 @@
 var React = require('react');
 var { RouteHandler, Link } = require('react-router');
 
+require('./styles.less');
+
 var Application = React.createClass({
 
   render() {
