@@ -7,12 +7,14 @@ module.exports = {
   ],
   output: {
     path: __dirname + '/build/',
-    filename: '[name].js'
+    filename: '[name].js',
+    publicPath: '/assets/'
   },
   module: {
     loaders: [
       { test: /\.jsx?$/, loaders: ['jsx?harmony'] },
-      { test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') }
+      { test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
+      { test: /\.jpe?g$/, loader: 'url?limit=10000' }
     ]
   },
   resolve: {

@@ -9,12 +9,14 @@ module.exports = {
     path: __dirname + '/build/',
     filename: '[name].commonjs.js',
     library: true,
-    libraryTarget: 'commonjs2'
+    libraryTarget: 'commonjs2',
+    publicPath: '/assets/'
   },
   module: {
     loaders: [
       { test: /\.jsx?$/, loaders: ['jsx?harmony'] },
-      { test: /\.less$/, loader: 'null' }
+      { test: /\.less$/, loader: 'null' },
+      { test: /\.jpe?g$/, loader: 'url?limit=10000' }
     ]
   },
   resolve: {
