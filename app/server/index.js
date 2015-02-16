@@ -13,6 +13,35 @@ app.use(views(__dirname, { map: { html: 'underscore' } }));
 app.use(mount('/assets', serve(__dirname + '/../../build')));
 
 
+
+// SWARM
+//
+
+var Swarm = require('swarm');
+var ws    = require('ws');
+var WSStream = require('swarm/lib/EinarosWSStream');
+
+Swarm.env.debug = true;
+
+var fileStorage = new Swarm.FileStorage('./swarm-data');
+app.swarmHost = new Swarm.Host('swarm~nodejs', 0, fileStorage);
+Swarm.env.localhost = app.swarmHost;
+
+var apiHandler = require('swarm-restapi').createHandler({
+  route: '/api',
+  host: app.swarmHost,
+  authenticate: function() { return true; }
+});
+
+router.all(/^\/api\//, function *(next) {
+  apiHandler(this.req, this.res, next);
+});
+
+//
+// END SWARM
+
+
+
 const scripts = {
   prod:  '<script src="/assets/main.js"></script>',
   local: '<script src="//localhost:7007/assets/main.js"></script>'
