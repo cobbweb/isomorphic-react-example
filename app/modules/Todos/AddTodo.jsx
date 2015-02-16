@@ -1,7 +1,7 @@
 var React = require('react');
 var TodoActions = require('./TodoActions');
 
-module.exports = React.createClass({
+var AddTodo = React.createClass({
 
   addTodo(event) {
     event.preventDefault();
@@ -20,3 +20,5 @@ module.exports = React.createClass({
   }
 
 });
+
+module.exports = AddTodo;

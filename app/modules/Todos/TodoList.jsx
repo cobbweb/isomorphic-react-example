@@ -1,6 +1,6 @@
 var React = require('react');
 
-module.exports = React.createClass({
+var TodoList = React.createClass({
 
   render() {
     var todos = this.props.todos;
@@ -12,3 +12,5 @@ module.exports = React.createClass({
   }
 
 });
+
+module.exports = TodoList;

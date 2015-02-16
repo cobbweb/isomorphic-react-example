@@ -4,7 +4,7 @@ var AddTodo   = require('./AddTodo');
 var TodoStore = require('./TodoStore');
 
 
-module.exports = React.createClass({
+var Todos = React.createClass({
 
   getInitialState() {
     return { todos: this.getTodos() };
@@ -39,3 +39,5 @@ module.exports = React.createClass({
   }
 
 });
+
+module.exports = Todos;
