@@ -1,5 +1,7 @@
 // Server crap
 var app     = require('koa')();
+var koaws   = require('koa-ws');
+var c2k     = require('koa-connect');
 var serve   = require('koa-static');
 var views   = require('koa-render');
 var mount   = require('koa-mount');
@@ -18,7 +20,7 @@ app.use(mount('/assets', serve(__dirname + '/../../build')));
 //
 
 var Swarm = require('swarm');
-var ws    = require('ws');
+var WebSocket = require('ws');
 var WSStream = require('swarm/lib/EinarosWSStream');
 
 Swarm.env.debug = true;
@@ -30,12 +32,32 @@ Swarm.env.localhost = app.swarmHost;
 var apiHandler = require('swarm-restapi').createHandler({
   route: '/api',
   host: app.swarmHost,
-  authenticate: function() { return true; }
+  authenticate: function(req, cb) { cb(null, 'me'); }
 });
 
+var getResults = function *(req) {
+  var d = Promise.defer();
+
+  apiHandler(req, function(err, results) {
+    if (err) {
+      return d.reject(err);
+    }
+
+    d.resolve(resullts);
+  });
+
+  return d.promise;
+};
+
 router.all(/^\/api\//, function *(next) {
-  apiHandler(this.req, this.res, next);
+  var results = yield getResults(this.req);
+  var json    = JSON.stringify(results);
+  this.body = json;
+  this.length = json.length;
+  this.type = 'application/json';
 });
+
+app.use(koaws(app));
 
 //
 // END SWARM
@@ -68,3 +90,8 @@ app.use(router.routes())
 
 app.listen(7001);
 console.log('Server running at http://localhost:7001');
+
+app.ws.server.on('connection', function(ws) {
+  console.log('new connection');
+  app.swarmHost.accept(new WSStream(ws), { delay: 50 });
+});
