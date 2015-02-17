@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --progress --colours --config webpack.prod-node.config.js && webpack --progress --colours --config webpack.prod-web.config.js",
-    "prod-server": "ENVIRONMENT='prod' iojs index.js",
+    "prod-server": "./bin/prod-server.sh",
     "dev-server": "./bin/dev-server.sh"
   },
   "repository": {
@@ -29,8 +29,10 @@
   "dependencies": {
     "6to5": "^3.5.3",
     "alt": "^0.13.1",
+    "asteroid": "^0.6.1",
     "co": "^4.3.1",
     "css-loader": "^0.9.1",
+    "ddp.js": "^0.4.5",
     "extract-text-webpack-plugin": "^0.3.8",
     "file-loader": "^0.8.1",
     "jsx-loader": "^0.12.2",
@@ -43,6 +45,7 @@
     "less": "^2.4.0",
     "less-loader": "^2.0.0",
     "null-loader": "^0.1.0",
+    "q": "^1.1.2",
     "react": "^0.12.2",
     "react-router": "^0.12.0",
     "style-loader": "^0.8.3",

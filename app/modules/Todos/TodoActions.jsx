@@ -4,7 +4,8 @@ class TodoActions {
 
   constructor() {
     this.generateActions(
-      'create'
+      'create',
+      'remove'
     );
   }
 

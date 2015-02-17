@@ -1,19 +1,44 @@
 var alt = require('../alt');
 var TodoActions = require('./TodoActions');
 
+alt.backend.subscribe('todos');
+
+var Todos = alt.backend.getCollection('todos');
+var TodosQuery = Todos.reactiveQuery({});
+
 class TodoStore {
 
   constructor() {
     this.bindActions(TodoActions);
-    this.todos = [];
 
-    this.onCreate('Buy Milk');
-    this.onCreate('Feed Dog');
+    this.todos = TodosQuery.result;
+
+    TodosQuery.on('change', this.refresh.bind(this));
   }
 
   onCreate(text) {
-    var id = (+new Date() + Math.floor(Math.random() * 999999)).toString(36);
-    this.todos.push({ id: id, text: text });
+    if (!this.getInstance()) {
+      return true;
+    }
+
+    Todos.insert({ text: text });
+  }
+
+  onRemove(_id) {
+    if (!this.getInstance()) {
+      return true;
+    }
+
+    Todos.remove(_id);
+  }
+
+  refresh() {
+    if (!this.getInstance()) {
+      return true;
+    }
+
+    this.todos = TodosQuery.result;
+    this.getInstance().emitChange();
   }
 
 }

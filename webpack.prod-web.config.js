@@ -18,7 +18,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      asteroid: 'asteroid/dist/asteroid.browser.js'
+    }
   },
   plugins: [
     new ExtractTextPlugin('[name].css')

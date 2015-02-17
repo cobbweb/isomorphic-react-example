@@ -25,7 +25,10 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      asteroid: 'asteroid/dist/asteroid.browser.js'
+    }
   },
   devtool: '#inline-source-map'
 };

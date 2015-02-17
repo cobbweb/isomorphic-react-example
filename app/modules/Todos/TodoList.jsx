@@ -1,4 +1,5 @@
 var React = require('react');
+var TodoItem = require('./TodoItem');
 
 var TodoList = React.createClass({
 
@@ -6,7 +7,7 @@ var TodoList = React.createClass({
     var todos = this.props.todos;
     return (
       <ul className="todo-list">
-        {todos.map((todo, key) => <li key={key}>{todo.text}</li>)}
+        {todos.map((todo) => <TodoItem todo={todo} />)}
       </ul>
     );
   }

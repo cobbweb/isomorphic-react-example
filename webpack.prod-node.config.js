@@ -2,9 +2,9 @@ var webpack = require('webpack');
 
 module.exports = {
   target: 'node',
-  entry: [
-    './app/modules/routes.jsx'
-  ],
+  entry: {
+    routes: './app/modules/routes.jsx'
+  },
   output: {
     path: __dirname + '/build/',
     filename: '[name].commonjs.js',
@@ -20,6 +20,9 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      asteroid: 'asteroid/dist/asteroid.node.js'
+    }
   }
 };
