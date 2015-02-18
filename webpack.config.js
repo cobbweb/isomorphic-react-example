@@ -4,8 +4,8 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://localhost:7007/',
     'webpack/hot/only-dev-server',
-    './app/modules/Application/index.jsx',
-    './app/modules/index.jsx'
+    './src/app/Application/index.jsx',
+    './src/app/index.jsx'
   ],
   output: {
     path: __dirname + '/build/',
