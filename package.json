@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --progress --colours --config webpack.prod-node.config.js && webpack --progress --colours --config webpack.prod-web.config.js",
+    "build": "npm install && webpack --progress --colours --config webpack.prod-node.config.js && webpack --progress --colours --config webpack.prod-web.config.js",
     "prod-server": "ENVIRONMENT='prod' iojs index.js",
     "dev-server": "./bin/dev-server.sh"
   },
@@ -46,6 +46,7 @@
     "null-loader": "^0.1.0",
     "pouchdb": "^3.3.1",
     "react": "^0.12.2",
+    "react-resolver": "0.0.2",
     "react-router": "^0.12.0",
     "style-loader": "^0.8.3",
     "swarm": "^0.3.25",
