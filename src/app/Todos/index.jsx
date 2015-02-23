@@ -2,9 +2,20 @@ var React     = require('react');
 var TodoList  = require('./TodoList');
 var AddTodo   = require('./AddTodo');
 var TodoStore = require('./TodoStore');
+var Resolver  = require('react-resolver');
 
 
 var Todos = React.createClass({
+
+  mixins: [Resolver.mixin],
+
+  statics: {
+    resolve: {
+      todos() {
+        return TodoStore.getState().loaded;
+      }
+    }
+  },
 
   getInitialState() {
     return { todos: this.getTodos() };

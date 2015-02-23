@@ -18,7 +18,10 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      pouchdb: 'pouchdb/dist/pouchdb.js'
+    }
   },
   plugins: [
     new ExtractTextPlugin('[name].css')

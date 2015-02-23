@@ -1,9 +1,17 @@
 // Browser entry point
 
-var React = require('react');
-var Router = require('react-router');
-var routes = require('./routes');
+var React    = require('react');
+var Router   = require('react-router');
+var resolver = require('react-resolver').create();
+var routes   = resolver.route(require('./routes'));
+
+
+var appContainer = document.getElementById('app');
+
+React.render(<div>Loading</div>, appContainer);
 
 Router.run(routes, Router.HistoryLocation, (Handler) => {
-  React.render(<Handler />, document.getElementById('app'))
+  resolver.handle(Handler).then((resolved) => {
+    React.render(<Handler />, appContainer);
+  });
 });

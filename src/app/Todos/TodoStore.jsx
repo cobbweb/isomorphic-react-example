@@ -1,9 +1,9 @@
 var alt = require('../alt');
 var TodoActions = require('./TodoActions');
-var PouchDB = require('pouchdb/dist/pouchdb.js');
+var PouchDB = require('pouchdb');
 
-var db = new PouchDB('todos');
-var sync = PouchDB.sync('todos', 'http://localhost:5984/todos', { live: true });
+var db = new PouchDB('http://localhost:5984/todos');
+// var sync = PouchDB.sync('todos', , { live: true });
 
 class TodoStore {
 
@@ -12,7 +12,8 @@ class TodoStore {
     this.todos = {};
 
     this.refresh();
-    sync.on('change', this.refresh.bind(this));
+    // sync.on('change', this.refresh.bind(this));
+    this.loaded = db.allDocs({ include_docs: true });
   }
 
   onCreate(text) {
@@ -26,6 +27,10 @@ class TodoStore {
       response.rows.forEach((row) => { this.todos[row.id] = row.doc});
       this.getInstance().emitChange();
     });
+  }
+
+  onLoad(cb) {
+    this._loaded.then(cb);
   }
 
 }

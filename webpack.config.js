@@ -15,7 +15,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/,  loaders: ['react-hot', 'jsx?harmony'], exclude: /node_modules/ },
+      { test: /\.jsx?$/,  loaders: ['react-hot', 'jsx?harmony'] },
       { test: /\.less$/,  loader: 'style!css!less' },
       { test: /\.jpe?g$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
     ]
@@ -25,7 +25,10 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['', '.js', '.jsx'],
+    alias: {
+      pouchdb: 'pouchdb/dist/pouchdb.js'
+    }
   },
   devtool: '#inline-source-map'
 };

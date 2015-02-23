@@ -6,10 +6,13 @@ module.exports = function *(url, env) {
     // App crap
     var React = require('react');
     var Router = require('react-router');
-    var routes = require('../../build/main.commonjs.js');
+    var resolver = require('react-resolver').create();
+    var routes   = resolver.route(require('../../build/main.commonjs.js'));
 
     Router.run(routes, url, function (Handler) {
-      d.resolve(React.renderToString(React.createElement(Handler)));
+      resolver.handle(Handler).then(() => {
+        d.resolve(React.renderToString(React.createElement(Handler)));
+      });
     });
   } else {
     d.resolve('');
