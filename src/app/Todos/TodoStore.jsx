@@ -26,7 +26,6 @@ class TodoStore {
   }
 
   onCreate(text) {
-    console.log('create');
     var doc = { "_id": new Date().toJSON(), text: text };
     db.put(doc).then(this.refresh.bind(this));
   }
