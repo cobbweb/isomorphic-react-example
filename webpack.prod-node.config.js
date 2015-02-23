@@ -14,12 +14,16 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loaders: ['jsx?harmony'] },
+      { test: /\.jsx?$/, loaders: ['jsx?harmony'], exclude: /node_modules/ },
       { test: /\.less$/, loader: 'null' },
       { test: /\.jpe?g$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
     ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
-  }
+  },
+  externals: [ /^(?!\.)/ ],
+  plugins: [
+    new webpack.optimize.DedupePlugin()
+  ]
 };
