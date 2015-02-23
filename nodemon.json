@@ -1,5 +1,5 @@
 {
   "execMap": {
-    "js": "iojs"
+    "js": "iojs --harmony_arrow_functions"
   }
 }
