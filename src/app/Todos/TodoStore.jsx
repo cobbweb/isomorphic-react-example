@@ -1,9 +1,14 @@
 var alt = require('../alt');
 var TodoActions = require('./TodoActions');
 var PouchDB = require('pouchdb');
+var config = require('../../config/databases').todos;
 
-var db = new PouchDB('http://localhost:5984/todos');
-// var sync = PouchDB.sync('todos', , { live: true });
+var db = new PouchDB(config.database);
+var sync;
+
+if (config.replicateTo) {
+  sync = PouchDB.sync(config.database, config.replicateTo, { live: true })
+}
 
 class TodoStore {
 
@@ -12,11 +17,16 @@ class TodoStore {
     this.todos = {};
 
     this.refresh();
-    // sync.on('change', this.refresh.bind(this));
+
+    if (sync) {
+      sync.on('change', this.refresh.bind(this));
+    }
+
     this.loaded = db.allDocs({ include_docs: true });
   }
 
   onCreate(text) {
+    console.log('create');
     var doc = { "_id": new Date().toJSON(), text: text };
     db.put(doc).then(this.refresh.bind(this));
   }

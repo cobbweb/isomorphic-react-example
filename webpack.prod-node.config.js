@@ -24,6 +24,7 @@ module.exports = {
   },
   externals: [ /^(?!\.)/ ],
   plugins: [
-    new webpack.optimize.DedupePlugin()
+    new webpack.optimize.DedupePlugin(),
+    new webpack.DefinePlugin({ IS_SERVER: true })
   ]
 };

@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm install && webpack --progress --colours --config webpack.prod-node.config.js && webpack --progress --colours --config webpack.prod-web.config.js && npm run build-favicon",
-    "prod-server": "ENVIRONMENT='prod' iojs --harmony index.js",
+    "prod-server": "ENVIRONMENT='prod' node --harmony index.js",
     "dev-server": "./bin/dev-server.sh && npm run build-favicon",
     "build-favicon": "cp ./src/app/favicon.ico build/"
   },
@@ -44,6 +44,7 @@
     "koa-static": "^1.4.9",
     "less": "^2.4.0",
     "less-loader": "^2.0.0",
+    "leveldown": "^0.10.4",
     "lodash": "^3.2.0",
     "null-loader": "^0.1.0",
     "pouchdb": "^3.3.1",
@@ -51,7 +52,6 @@
     "react-resolver": "0.0.2",
     "react-router": "^0.12.0",
     "style-loader": "^0.8.3",
-    "swarm": "^0.3.25",
     "underscore": "^1.7.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.5.3",
