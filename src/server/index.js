@@ -6,6 +6,11 @@ var mount   = require('koa-mount');
 var router  = require('koa-router')();
 var getHTML = require('./getHTML');
 var envs    = require('./environments');
+var favicon = require('koa-favicon');
+var path    = require('path');
+
+const FAVICON_PATH = path.resolve(__dirname + '/../../build/favicon.ico');
+
 
 app.env = process.env.ENVIRONMENT || envs.LOCAL;
 
@@ -22,6 +27,8 @@ const stylesheets = {
   prod:  '<link type="text/css" rel="stylesheet" href="/assets/main.css"></link>',
   local: ''
 };
+
+app.use(favicon(FAVICON_PATH));
 
 app.use(function *(next) {
   this.html = yield getHTML(this.url, app.env);
