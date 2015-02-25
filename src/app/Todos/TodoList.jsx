@@ -1,5 +1,6 @@
 var React = require('react');
 var _     = require('lodash');
+var TodoItem = require('./TodoItem');
 
 var TodoList = React.createClass({
 
@@ -8,7 +9,7 @@ var TodoList = React.createClass({
     return (
       <ul className="todo-list">
         {_.map(todos, (todo, key) => {
-          return <li key={key}>{todo.text}</li>;
+          return <TodoItem key={key} todo={todo} />;
         })}
       </ul>
     );

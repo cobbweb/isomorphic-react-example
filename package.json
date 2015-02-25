@@ -32,8 +32,10 @@
     "babel": "^4.3.0",
     "babel-core": "^4.4.5",
     "babel-loader": "^4.0.0",
+    "bluebird": "^1.2.4",
     "co": "^4.3.1",
     "css-loader": "^0.9.1",
+    "eventemitter3": "^0.1.6",
     "extract-text-webpack-plugin": "^0.3.8",
     "file-loader": "^0.8.1",
     "koa": "^0.17.0",
@@ -55,6 +57,7 @@
     "style-loader": "^0.8.3",
     "underscore": "^1.7.0",
     "url-loader": "^0.5.5",
+    "uuid": "^2.0.1",
     "webpack": "^1.5.3",
     "webpack-dev-server": "^1.7.0"
   },

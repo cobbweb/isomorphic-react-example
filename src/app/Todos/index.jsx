@@ -12,7 +12,8 @@ var Todos = React.createClass({
   statics: {
     resolve: {
       todos() {
-        return TodoStore.getState().loaded;
+        TodoStore.loaded().then(() => console.log('I am resolved'))
+        return TodoStore.loaded();
       }
     }
   },
