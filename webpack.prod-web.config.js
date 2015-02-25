@@ -25,6 +25,9 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin('[name].css'),
-    new webpack.DefinePlugin({ IS_SERVER: false })
+    new webpack.DefinePlugin({ IS_SERVER: false }),
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.NoErrorsPlugin()
   ]
 };
