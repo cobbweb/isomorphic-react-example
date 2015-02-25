@@ -38,6 +38,7 @@
     "eventemitter3": "^0.1.6",
     "extract-text-webpack-plugin": "^0.3.8",
     "file-loader": "^0.8.1",
+    "immutable": "^3.6.2",
     "koa": "^0.17.0",
     "koa-better-body": "^1.0.17",
     "koa-favicon": "^1.2.0",

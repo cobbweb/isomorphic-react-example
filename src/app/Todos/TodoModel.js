@@ -1,6 +1,8 @@
 const TodoActions = require('./TodoActions');
 const PouchDB     = require('pouchdb');
 const config      = require('../../config/databases').todos;
+const { OrderedSet } = require('immutable');
+
 
 class TodoModel {
 
@@ -9,26 +11,30 @@ class TodoModel {
 
     if (config.replicateTo) {
       this.sync = PouchDB.sync(config.database, config.replicateTo, { live: true });
-      this.sync.on('change', (info) => {
-        if (info.direction === 'pull' && info.change.docs.length > 0) {
-          this.refresh();
-        }
-      });
     }
 
-    var n = Date.now();
     this.loaded = this.db.allDocs({ include_docs: true }).then((response) => {
-      this.handleResponse(response);
+      this.initializeData(response);
+
+      if (this.sync) {
+        this.sync.on('change', (info) => {
+          if (info.direction === 'pull' && info.change.docs.length > 0) {
+            this.updateData(info);
+          }
+        });
+      }
+
+      this.db.changes({ live: true, include_docs: true, since: 'now' }).on('change', this.updateData.bind(this));
     });
   }
 
-  refresh() {
-    this.db.allDocs({ include_docs: true }).then(this.handleResponse.bind(this));
+  updateData(info) {
+    console.log(info);
   }
 
-  handleResponse(response) {
-    this.docs = {};
-    response.rows.forEach((row) => this.docs[row.id] = row.doc);
+  initializeData(response) {
+    let docs = response.rows.map(row => row.doc);
+    this.docs = OrderedSet(docs);
     TodoActions.setState(this.docs);
   }
 
