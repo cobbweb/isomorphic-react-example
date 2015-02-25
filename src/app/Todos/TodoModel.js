@@ -1,7 +1,7 @@
 const TodoActions = require('./TodoActions');
 const PouchDB     = require('pouchdb');
 const config      = require('../../config/databases').todos;
-const { OrderedSet } = require('immutable');
+const { List } = require('immutable');
 
 
 class TodoModel {
@@ -30,11 +30,27 @@ class TodoModel {
 
   updateData(info) {
     console.log(info);
+
+    if (info.deleted) {
+      const doc = this.docs.find(doc => doc._id === info.id)
+      this.docs = this.docs.delete(doc);
+    } else {
+      let lastDoc, lastIndex;
+      this.docs.forEach((doc, index) => {
+        if (info.id > doc._id) {
+          lastIndex = index;
+        } else {
+          this.docs = this.docs.splice(index-1, 0, info.doc);
+        }
+      });
+    }
+
+    TodoActions.setState(this.docs);    
   }
 
   initializeData(response) {
     let docs = response.rows.map(row => row.doc);
-    this.docs = OrderedSet(docs);
+    this.docs = List(docs);
     TodoActions.setState(this.docs);
   }
 
