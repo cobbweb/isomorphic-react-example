@@ -2,12 +2,16 @@
 const React      = require('react');
 const Resolver   = require('react-resolver');
 const FluxyMixin = require('alt/mixins/FluxyMixin');
+const { Paper }  = require('material-ui');
 const { PureRenderMixin } = require('react/addons').addons;
 
 // App
 const AddTodo    = require('./AddTodo');
 const TodoList   = require('./TodoList');
 const TodoStore  = require('./TodoStore');
+
+require('./Todos.less');
+
 
 const Todos = React.createClass({
 
@@ -39,12 +43,11 @@ const Todos = React.createClass({
   render() {
     const todos = this.state.todos;
     return (
-      <div className="todos">
-        <h3>Todos</h3>
-
+      <Paper zDepth={3} className="todos">
+        <h1 className="mui-font-style-title">Todos</h1>
         <TodoList todos={todos} />
         <AddTodo />
-      </div>
+      </Paper>
     );
   }
 
