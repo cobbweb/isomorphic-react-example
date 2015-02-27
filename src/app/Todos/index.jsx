@@ -1,12 +1,14 @@
-var React     = require('react');
-var TodoList  = require('./TodoList');
-var AddTodo   = require('./AddTodo');
-var TodoStore = require('./TodoStore');
-var Resolver  = require('react-resolver');
+// Libs
+const React      = require('react');
+const Resolver   = require('react-resolver');
 const { PureRenderMixin } = require('react/addons').addons;
 
+// App
+const AddTodo    = require('./AddTodo');
+const TodoList   = require('./TodoList');
+const TodoStore  = require('./TodoStore');
 
-var Todos = React.createClass({
+const Todos = React.createClass({
 
   mixins: [Resolver.mixin, PureRenderMixin],
 
@@ -40,7 +42,7 @@ var Todos = React.createClass({
   },
 
   render() {
-    var todos = this.state.todos;
+    const todos = this.state.todos;
     return (
       <div className="todos">
         <h3>Todos</h3>
