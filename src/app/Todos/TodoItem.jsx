@@ -12,8 +12,6 @@ var TodoItem = React.createClass({
   },
 
   remove() {
-    window._rt = Date.now();
-
     TodoActions.remove(this.props.todo);
   }
 
