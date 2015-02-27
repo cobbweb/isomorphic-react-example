@@ -3,11 +3,12 @@ var TodoList  = require('./TodoList');
 var AddTodo   = require('./AddTodo');
 var TodoStore = require('./TodoStore');
 var Resolver  = require('react-resolver');
+const { PureRenderMixin } = require('react/addons').addons;
 
 
 var Todos = React.createClass({
 
-  mixins: [Resolver.mixin],
+  mixins: [Resolver.mixin, PureRenderMixin],
 
   statics: {
     resolve: {
