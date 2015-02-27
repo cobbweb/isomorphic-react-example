@@ -19,7 +19,6 @@ class TodoStore {
 
   setState(todos) {
     this.todos = todos;
-    console.log(todos);
     this.getInstance().emitChange();
   }
 
