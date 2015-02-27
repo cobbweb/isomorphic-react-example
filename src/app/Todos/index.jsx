@@ -1,6 +1,7 @@
 // Libs
 const React      = require('react');
 const Resolver   = require('react-resolver');
+const FluxyMixin = require('alt/mixins/FluxyMixin');
 const { PureRenderMixin } = require('react/addons').addons;
 
 // App
@@ -10,30 +11,25 @@ const TodoStore  = require('./TodoStore');
 
 const Todos = React.createClass({
 
-  mixins: [Resolver.mixin, PureRenderMixin],
+  mixins: [Resolver.mixin, PureRenderMixin, FluxyMixin],
 
   statics: {
     resolve: {
       todos() {
         return TodoStore.loaded();
       }
+    },
+    storeListeners: {
+      refresh: TodoStore
     }
-  },
-
-  getInitialState() {
-    return { todos: this.getTodos() };
   },
 
   getTodos() {
     return TodoStore.getState().todos;
   },
 
-  componentDidMount() {
-    TodoStore.listen(this.refresh);
-  },
-
-  componentWillUnmount() {
-    TodoStore.unlisten(this.refresh);
+  getInitialState() {
+    return { todos: this.getTodos() };
   },
 
   refresh() {
