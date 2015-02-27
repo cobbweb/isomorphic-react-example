@@ -1,7 +1,8 @@
 const TodoActions = require('./TodoActions');
 const PouchDB     = require('pouchdb');
 const config      = require('../../config/databases').todos;
-const { List } = require('immutable');
+const { List }    = require('immutable');
+const sortedIndex = require('lodash/array/sortedIndex');
 
 
 class TodoModel {
@@ -29,20 +30,18 @@ class TodoModel {
   }
 
   updateData(info) {
-    console.log(info);
-
     if (info.deleted) {
-      const doc = this.docs.find(doc => doc._id === info.id)
-      this.docs = this.docs.delete(doc);
+      // Do delete operation
+      const doc = this.docs.find(doc => doc._id === info.id);
+
+      // Doc gets optimisitcally deleted from the remove event
+      if (doc) {
+        this.docs = this.docs.delete(this.docs.indexOf(doc));
+      }
     } else {
-      let lastDoc, lastIndex;
-      this.docs.forEach((doc, index) => {
-        if (info.id > doc._id) {
-          lastIndex = index;
-        } else {
-          this.docs = this.docs.splice(index-1, 0, info.doc);
-        }
-      });
+      // Insert or update event
+      const index = sortedIndex(this.docs.toArray(), info.doc, (doc) => doc._id);
+      this.docs = this.docs.splice(index, 0, info.doc);
     }
 
     TodoActions.setState(this.docs);    
@@ -57,11 +56,14 @@ class TodoModel {
   insert(doc) {
     doc.createdAt = String(Date.now());
     doc._id = doc.text.substring(0, 16) + '_' + doc.createdAt;
-    this.db.post(doc);
+    this.db.put(doc);
   }
 
   remove(doc) {
-    this.db.remove(doc);
+    this.db.remove(doc).then((response) => {
+      var info = { deleted: true, id: response.id };
+      this.updateData(info);
+    });
   }
 
 }
