@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/webpack/react-starter",
   "dependencies": {
-    "alt": "^0.13.1",
+    "alt": "^0.13.10",
     "babel": "^4.3.0",
     "babel-core": "^4.4.5",
     "babel-loader": "^4.0.0",
