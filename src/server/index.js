@@ -9,13 +9,13 @@ var envs    = require('./environments');
 var favicon = require('koa-favicon');
 var path    = require('path');
 
-const FAVICON_PATH = path.resolve(__dirname + '/../../build/favicon.ico');
+const FAVICON_PATH = path.resolve(__dirname, '../../build/favicon.ico');
 
 
 app.env = process.env.ENVIRONMENT || envs.LOCAL;
 
 app.use(views(__dirname, { map: { html: 'underscore' } }));
-app.use(mount('/assets', serve(__dirname + '/../../build')));
+app.use(mount('/assets', serve(path.resolve(__dirname, '../../build'))));
 
 
 const scripts = {

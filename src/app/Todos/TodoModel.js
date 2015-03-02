@@ -44,7 +44,7 @@ class TodoModel {
       this.docs = this.docs.splice(index, 0, info.doc);
     }
 
-    TodoActions.setState(this.docs);    
+    TodoActions.setState(this.docs);
   }
 
   initializeData(response) {
