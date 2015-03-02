@@ -17,7 +17,7 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/,  loaders: ['react-hot', 'babel'], exclude: /node_modules(?!\/react-resolver)/ },
       { test: /\.less$/,  loader: 'style!css!less' },
-      { test: /\.jpe?g$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
+      { test: /\.(?:jpe?g|png|gif|svg)$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
     ]
   },
   plugins: [

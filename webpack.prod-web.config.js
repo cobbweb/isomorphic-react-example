@@ -14,7 +14,7 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/, loaders: ['babel'], exclude: /node_modules(?!\/react-resolver)/ },
       { test: /\.less$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader!less-loader') },
-      { test: /\.jpe?g$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
+      { test: /\.(?:jpe?g|png|gif|svg)$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
     ]
   },
   resolve: {
