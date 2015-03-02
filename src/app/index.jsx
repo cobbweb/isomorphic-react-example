@@ -1,4 +1,5 @@
 // Browser entry point
+require("react-tap-event-plugin")();
 
 var React    = require('react');
 var Router   = require('react-router');

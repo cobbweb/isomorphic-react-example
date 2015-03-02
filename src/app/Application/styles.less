@@ -1,4 +1,28 @@
+@import '~material-ui/src/less/scaffolding';
+@import '~material-ui/src/less/components';
+
 body, html {
   font-family: Helvetica, sans-serif;
   background: darken(white, 10%);
+}
+
+.app-bar-icon-size() {
+  @height: 36px;
+
+  position: absolute;
+  top: 50%;
+  right: 20px;
+
+  height: @height;
+  margin-top: -@height / 2;
+}
+
+.app-bar-icon-button {
+  .app-bar-icon-size();
+}
+
+.app-bar-icon {
+  .app-bar-icon-size();
+  display: block;
+  filter: invert(1);
 }
