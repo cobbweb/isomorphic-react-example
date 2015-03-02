@@ -1,4 +1,5 @@
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer-core');
 
 module.exports = {
   entry: [
@@ -16,10 +17,11 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.jsx?$/,  loaders: ['react-hot', 'babel'], exclude: /node_modules(?!\/react-resolver)/ },
-      { test: /\.less$/,  loader: 'style!css!less' },
+      { test: /\.less$/,  loader: 'style!css!postcss!less' },
       { test: /\.(?:jpe?g|png|gif|svg)$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
     ]
   },
+  postcss: [autoprefixer],
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
