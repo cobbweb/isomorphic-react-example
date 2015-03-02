@@ -14,7 +14,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loaders: ['babel'], exclude: /node_modules(?!\/react-resolver)/ },
+      { test: /\.jsx?$/, loader: 'babel', exclude: /node_modules(?!\/react-resolver)/ },
       { test: /\.less$/, loader: 'null' },
       { test: /\.(?:jpe?g|png|gif|svg)$/, loader: 'url?limit=10000&name=[name].[sha512:hash:base64:7].[ext]' }
     ]
