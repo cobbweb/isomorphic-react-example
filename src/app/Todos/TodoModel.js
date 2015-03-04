@@ -1,6 +1,8 @@
 const TodoActions = require('./TodoActions');
 const PouchDB     = require('pouchdb');
 const config      = require('../../config/databases').todos;
+const state       = require('../state');
+const Cursor      = require('immutable/contrib/cursor');
 const { List }    = require('immutable');
 const sortedIndex = require('lodash/array/sortedIndex');
 
@@ -49,7 +51,8 @@ class TodoModel {
 
   initializeData(response) {
     let docs = response.rows.map(row => row.doc);
-    this.docs = List(docs);
+    this.docs = Cursor.from(state.getState(), ['data', 'todos'], newData => state.setState(newData));
+    
     TodoActions.setState(this.docs);
   }
 
