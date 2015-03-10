@@ -6,6 +6,11 @@ var AddTodo = React.createClass({
   addTodo(event) {
     event.preventDefault();
     var input = this.refs.input.getDOMNode();
+    
+    if (!input.value) {
+      return;
+    }
+
     TodoActions.create(input.value);
     input.value = '';
   },
