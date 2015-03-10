@@ -33,25 +33,23 @@ class TodoModel {
 
   updateData(info) {
     if (info.deleted) {
-      // Do delete operation
-      const doc = this.docs.find(doc => doc._id === info.id);
-
-      // Doc gets optimisitcally deleted from the remove event
-      if (doc) {
-        this.docs = this.docs.delete(this.docs.indexOf(doc));
-      }
+      this.docs = this.docs.delete(info.id);
     } else {
       // Insert or update event
-      const index = sortedIndex(this.docs.toArray(), info.doc, (doc) => doc._id);
-      this.docs = this.docs.splice(index, 0, info.doc);
+      this.docs = this.docs.set(info.id, info.doc);
     }
 
     TodoActions.setState(this.docs);
   }
 
   initializeData(response) {
-    let docs = response.rows.map(row => row.doc);
-    this.docs = Cursor.from(state.getState(), ['data', 'todos'], newData => state.setState(newData));
+    this.docs = Cursor.from(state.getState(), ['data', 'todos'], newData => {
+      state.setState(newData)
+    });
+
+    this.docs = this.docs.withMutations(map => {
+      response.rows.forEach(row => map.set(row.id, row.doc))
+    });
     
     TodoActions.setState(this.docs);
   }

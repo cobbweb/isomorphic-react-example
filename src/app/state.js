@@ -1,5 +1,5 @@
 var Immutable = require('immutable');
-var data = Immutable.fromJS({ data: { todos: [] }});
+var data = Immutable.fromJS({ data: { todos: {} }});
 
 module.exports = {
   
