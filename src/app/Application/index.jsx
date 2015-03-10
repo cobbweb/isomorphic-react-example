@@ -20,7 +20,7 @@ var Application = React.createClass({
 
         <NavMenu ref="navMenu" />
 
-        <section>
+        <section className="app-inner">
           <RouteHandler />
         </section>
       </AppCanvas>
