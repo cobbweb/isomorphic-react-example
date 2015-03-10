@@ -12,3 +12,7 @@ module.exports = {
   }
 
 };
+
+if (typeof window !== 'undefined') {
+  window.__app__state = module.exports;
+}
