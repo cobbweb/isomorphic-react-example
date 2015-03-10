@@ -17,6 +17,10 @@ class TodoStore {
     TodoModel.remove(todo);
   }
 
+  onRemoveAll() {
+    TodoModel.removeAll();
+  }
+
   setState(todos) {
     this.todos = todos;
     this.getInstance().emitChange();

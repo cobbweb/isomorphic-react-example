@@ -67,6 +67,14 @@ class TodoModel {
     });
   }
 
+  removeAll() {
+    let docs = this.docs.toArray();
+    docs.forEach(doc => doc._deleted = true);
+    this.db.bulkDocs(docs, (err, response) => {
+      console.log(arguments);
+    });
+  }
+
 }
 
 module.exports = new TodoModel();

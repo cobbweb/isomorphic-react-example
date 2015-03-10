@@ -6,7 +6,8 @@ class TodoActions {
     this.generateActions(
       'create',
       'setState',
-      'remove'
+      'remove',
+      'removeAll'
     );
   }
 

@@ -6,9 +6,10 @@ const { Paper }  = require('material-ui');
 const { PureRenderMixin } = require('react/addons').addons;
 
 // App
-const AddTodo    = require('./AddTodo');
-const TodoList   = require('./TodoList');
-const TodoStore  = require('./TodoStore');
+const AddTodo     = require('./AddTodo');
+const TodoList    = require('./TodoList');
+const TodoStore   = require('./TodoStore');
+const TodoActions = require('./TodoActions');
 
 require('./Todos.less');
 
@@ -40,11 +41,16 @@ const Todos = React.createClass({
     this.setState({ todos: this.getTodos() });
   },
 
+  removeAll() {
+    TodoActions.removeAll();
+  },
+
   render() {
     const todos = this.state.todos;
     return (
       <Paper zDepth={3} className="todos">
         <h1 className="mui-font-style-title">Todos</h1>
+        <button onClick={this.removeAll}>Remove All</button>
         <TodoList todos={todos} />
         <AddTodo />
       </Paper>
