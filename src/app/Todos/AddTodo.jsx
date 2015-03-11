@@ -1,5 +1,5 @@
 var React = require('react');
-var TodoActions = require('./TodoActions');
+var TodoService = require('./TodoService');
 
 var AddTodo = React.createClass({
 
@@ -11,7 +11,7 @@ var AddTodo = React.createClass({
       return;
     }
 
-    TodoActions.create(input.value);
+    TodoService.create(input.value);
     input.value = '';
   },
 

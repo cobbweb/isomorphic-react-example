@@ -2,12 +2,21 @@ var React = require('react');
 var NavMenu = require('../NavMenu');
 var { AppCanvas, AppBar, EnhancedButton } = require('material-ui');
 var { RouteHandler } = require('react-router');
+var Atom = require('../Atom');
 
 require('./styles.less');
 
 var icon = require('./drink.png');
 
 var Application = React.createClass({
+
+  componentDidMount() {
+    Atom.onChange(this.render);
+  },
+
+  componentWillUnmount() {
+    Atom.offChange(this.render);
+  },
 
   render() {
     return (

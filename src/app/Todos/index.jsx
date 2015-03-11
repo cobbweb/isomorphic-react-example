@@ -1,36 +1,32 @@
 // Libs
 const React      = require('react');
 const Resolver   = require('react-resolver');
-const FluxyMixin = require('alt/mixins/FluxyMixin');
 const { Paper }  = require('material-ui');
 const { PureRenderMixin } = require('react/addons').addons;
 
 // App
+const Atom        = require('../Atom');
 const AddTodo     = require('./AddTodo');
 const TodoList    = require('./TodoList');
-const TodoStore   = require('./TodoStore');
-const TodoActions = require('./TodoActions');
+const TodoService = require('./TodoService');
 
 require('./Todos.less');
 
 
 const Todos = React.createClass({
 
-  mixins: [Resolver.mixin, PureRenderMixin, FluxyMixin],
+  mixins: [Resolver.mixin, PureRenderMixin],
 
   statics: {
     resolve: {
       todos() {
-        return TodoStore.loaded();
+        return TodoService.loaded();
       }
-    },
-    storeListeners: {
-      refresh: TodoStore
     }
   },
 
   getTodos() {
-    return TodoStore.getState().todos;
+    return Atom.getIn(['data', 'todos']);
   },
 
   getInitialState() {
@@ -42,11 +38,12 @@ const Todos = React.createClass({
   },
 
   removeAll() {
-    TodoActions.removeAll();
+    TodoService.removeAll();
   },
 
   render() {
     const todos = this.state.todos;
+    console.log(todos);
     return (
       <Paper zDepth={3} className="todos">
         <h1 className="mui-font-style-title">Todos</h1>

@@ -1,5 +1,5 @@
 var React = require('react');
-var TodoActions = require('./TodoActions');
+var TodoService = require('./TodoService');
 
 var TodoItem = React.createClass({
 
@@ -12,7 +12,7 @@ var TodoItem = React.createClass({
   },
 
   remove() {
-    TodoActions.remove(this.props.todo);
+    TodoService.remove(this.props.todo);
   }
 
 });

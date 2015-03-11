@@ -1,10 +1,11 @@
-const TodoActions = require('./TodoActions');
+const TodoService = require('./TodoService');
 const PouchDB     = require('pouchdb');
 const config      = require('../../config/databases').todos;
-const state       = require('../state');
-const Cursor      = require('immutable/contrib/cursor');
+const Atom       = require('../Atom');
 const { List }    = require('immutable');
 const sortedIndex = require('lodash/array/sortedIndex');
+
+const TODOS_PATH = ['data', 'todos'];
 
 
 class TodoModel {
@@ -39,19 +40,16 @@ class TodoModel {
       this.docs = this.docs.set(info.id, info.doc);
     }
 
-    TodoActions.setState(this.docs);
+    Atom.setIn(['data', 'todos'], this.docs);
   }
 
   initializeData(response) {
-    this.docs = Cursor.from(state.getState(), ['data', 'todos'], newData => {
-      state.setState(newData)
-    });
-
+    this.docs = Atom.getIn(['data', 'todos']);
     this.docs = this.docs.withMutations(map => {
       response.rows.forEach(row => map.set(row.id, row.doc))
     });
     
-    TodoActions.setState(this.docs);
+    Atom.setIn(['data', 'todos'], this.docs);
   }
 
   insert(doc) {
