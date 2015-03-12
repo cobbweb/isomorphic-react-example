@@ -1,8 +1,9 @@
-var React = require('react');
+var React = require('react/addons');
 var NavMenu = require('../NavMenu');
 var { AppCanvas, AppBar, EnhancedButton } = require('material-ui');
 var { RouteHandler } = require('react-router');
 var Atom = require('../Atom');
+var TodoApp = require('../Todos');
 
 require('./styles.less');
 
@@ -11,14 +12,19 @@ var icon = require('./drink.png');
 var Application = React.createClass({
 
   componentDidMount() {
-    Atom.onChange(this.render);
+    Atom.onChange(this.render.bind(this));
   },
 
   componentWillUnmount() {
-    Atom.offChange(this.render);
+    Atom.offChange(this.render.bind(this));
   },
 
   render() {
+    // console.log(React.renderToStaticMarkup(React.addons.cloneWithProps(
+    //   <div>
+    //   <RouteHandler />
+    //   </div>
+    // )));
     return (
       <AppCanvas predefinedLayout={1}>
         <AppBar showMenuIconButton={true} title="Isomorphic React" onMenuIconButtonTouchTap={this.onMenuIconButtonTouchTap}>
@@ -30,7 +36,7 @@ var Application = React.createClass({
         <NavMenu ref="navMenu" />
 
         <section className="app-inner">
-          <RouteHandler />
+          <TodoApp />
         </section>
       </AppCanvas>
     );

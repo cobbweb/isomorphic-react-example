@@ -1,4 +1,5 @@
 const Immutable = require('immutable');
+const Cursor    = require('immutable/contrib/cursor');
 
 class Atom {
 
@@ -44,13 +45,12 @@ class Atom {
     this.callbacks = [];
   }
 
-  getIn() {
-    return this.data.getIn.apply(this.data, arguments);
-  }
-
-  setIn() {
-    this.data.setIn.apply(this.data, arguments);
-    this.emitChange();
+  getCursor(path) {
+    return Cursor.from(this.data, path, newData => {
+      console.log('newData (should be false)', newData == this.data);
+      this.data = newData;
+      this.emitChange();
+    })
   }
 
 }

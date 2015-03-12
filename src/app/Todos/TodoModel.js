@@ -12,6 +12,7 @@ class TodoModel {
 
   constructor() {
     this.db = new PouchDB(config.database);
+    this.cursor = Atom.getCursor(['data', 'todos']);
 
     if (config.replicateTo) {
       this.sync = PouchDB.sync(config.database, config.replicateTo, { live: true });
@@ -34,22 +35,19 @@ class TodoModel {
 
   updateData(info) {
     if (info.deleted) {
-      this.docs = this.docs.delete(info.id);
+      this.cursor = this.cursor.delete(info.id);
     } else {
       // Insert or update event
-      this.docs = this.docs.set(info.id, info.doc);
+      this.cursor = this.cursor.set(info.id, info.doc);
     }
-
-    Atom.setIn(['data', 'todos'], this.docs);
   }
 
   initializeData(response) {
-    this.docs = Atom.getIn(['data', 'todos']);
-    this.docs = this.docs.withMutations(map => {
+    const updated = this.cursor.withMutations(map => {
       response.rows.forEach(row => map.set(row.id, row.doc))
     });
-    
-    Atom.setIn(['data', 'todos'], this.docs);
+
+    this.cursor = this.cursor.merge(updated);
   }
 
   insert(doc) {
@@ -66,7 +64,7 @@ class TodoModel {
   }
 
   removeAll() {
-    let docs = this.docs.toArray();
+    let docs = this.cursor.toArray();
     docs.forEach(doc => doc._deleted = true);
     this.db.bulkDocs(docs, (err, response) => {
       console.log(arguments);

@@ -12,7 +12,5 @@ var appContainer = document.getElementById('app');
 React.render(<div>Loading</div>, appContainer);
 
 Router.run(routes, Router.HistoryLocation, (Handler) => {
-  resolver.handle(Handler).then((resolved) => {
-    React.render(<Handler />, appContainer);
-  });
+  React.render(<Handler />, appContainer);
 });
