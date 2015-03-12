@@ -7,7 +7,7 @@ cd ../
 
 npm install
 
-webpack-dev-server -h --port 7007 -c --progress --config ./webpack.config.js --devtool eval &
+webpack-dev-server --port 7007 -c --progress --config ./webpack.config.js --devtool eval &
 nodemon ./index.js
 
 trap "kill 0" SIGINT SIGTERM EXIT
