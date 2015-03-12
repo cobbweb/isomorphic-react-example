@@ -3,7 +3,6 @@ var NavMenu = require('../NavMenu');
 var { AppCanvas, AppBar, EnhancedButton } = require('material-ui');
 var { RouteHandler } = require('react-router');
 var Atom = require('../Atom');
-var TodoApp = require('../Todos');
 
 require('./styles.less');
 
@@ -31,7 +30,7 @@ var Application = React.createClass({
         <NavMenu ref="navMenu" />
 
         <section className="app-inner">
-          <TodoApp />
+          <RouteHandler />
         </section>
       </AppCanvas>
     );

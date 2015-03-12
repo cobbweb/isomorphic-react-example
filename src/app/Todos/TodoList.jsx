@@ -14,7 +14,6 @@ var TodoList = React.createClass({
 
   render() {
     var todos = this.props.todos;
-    console.log('renderlist');
     return (
       <ul className="todo-list">
         {todos.toArray().map(todo => {
