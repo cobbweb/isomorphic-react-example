@@ -44,7 +44,7 @@ class TodoModel {
 
   initializeData(response) {
     const updated = this.cursor.withMutations(map => {
-      response.rows.forEach(row => map.set(row.id, row.doc))
+      response.rows.forEach(row => map.set(row.id, row.doc));
     });
 
     this.cursor = this.cursor.merge(updated);
@@ -67,6 +67,9 @@ class TodoModel {
     let docs = this.cursor.toArray();
     docs.forEach(doc => doc._deleted = true);
     this.db.bulkDocs(docs, (err, response) => {
+      if (err) {
+        throw err;
+      }
       console.log(arguments);
     });
   }

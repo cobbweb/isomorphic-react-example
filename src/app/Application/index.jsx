@@ -12,19 +12,14 @@ var icon = require('./drink.png');
 var Application = React.createClass({
 
   componentDidMount() {
-    Atom.onChange(this.render.bind(this));
+    Atom.onChange(this.forceUpdate.bind(this));
   },
 
   componentWillUnmount() {
-    Atom.offChange(this.render.bind(this));
+    Atom.offChange(this.forceUpdate.bind(this));
   },
 
   render() {
-    // console.log(React.renderToStaticMarkup(React.addons.cloneWithProps(
-    //   <div>
-    //   <RouteHandler />
-    //   </div>
-    // )));
     return (
       <AppCanvas predefinedLayout={1}>
         <AppBar showMenuIconButton={true} title="Isomorphic React" onMenuIconButtonTouchTap={this.onMenuIconButtonTouchTap}>

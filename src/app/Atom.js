@@ -47,10 +47,10 @@ class Atom {
 
   getCursor(path) {
     return Cursor.from(this.data, path, newData => {
-      console.log('newData (should be false)', newData == this.data);
+      console.log('newData (should be false)', newData === this.data);
       this.data = newData;
       this.emitChange();
-    })
+    });
   }
 
 }
