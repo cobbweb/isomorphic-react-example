@@ -21,7 +21,7 @@ var Application = React.createClass({
   render() {
     return (
       <AppCanvas predefinedLayout={1}>
-        <AppBar showMenuIconButton={true} title="Isomorphic React" onMenuIconButtonTouchTap={this._onMenuIconButtonTouchTap}>
+        <AppBar showMenuIconButton={true} title="Isomorphic React" onMenuIconButtonTouchTap={this.onMenuIconButtonTouchTap}>
           <EnhancedButton className='app-bar-icon-button'>
             <img className='app-bar-icon' src={icon} alt="Isomorphic React Icon" />
           </EnhancedButton>
@@ -36,7 +36,7 @@ var Application = React.createClass({
     );
   },
 
-  _onMenuIconButtonTouchTap() {
+  onMenuIconButtonTouchTap() {
     this.refs.navMenu.toggle();
   }
 
