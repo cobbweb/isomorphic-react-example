@@ -11,4 +11,5 @@ var SERVER = {
   }
 };
 
+// IS_SERVER is defined in Webpack config
 module.exports = IS_SERVER ? SERVER : CLIENT;
